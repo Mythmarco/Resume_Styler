@@ -1,4 +1,4 @@
-#BEPC Resume Styler
+# BEPC Resume Styler
 
 <img src="static/rs2.png" width="200">
 
