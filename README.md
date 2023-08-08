@@ -1,6 +1,4 @@
-#BEPC Resume Styler
-
-<img src="static/rs2.png" width="200">
+# <img src="static/rs2.png" width="100" height="100" style="vertical-align: middle;"> Resume Styler <i><span style="font-size: 0.8em;">for Recruiters</span></i>
 
 ## Overview
 The BEPC Resume Styler is a Streamlit application designed to enhance the formatting of resumes. It accepts both PDF and DOCX files, and applies a unique and professional styling to the content. The application uses artificial intelligence to process and reformat the content of the resume.
@@ -19,7 +17,7 @@ Copy code
 
 The application will then be accessible in your web browser at http://localhost:8501.
 
-## Steps to use the app:
+## Usage:
 Enter the job description in the provided text area.
 Upload the resume using the file uploader.
 Click the 'Save Job Description' button to save your job description.
