@@ -2,4 +2,4 @@ pdfminer.six
 openai
 docx2txt
 dotenv
---use-pep517
+pep517
