@@ -2,6 +2,7 @@ import streamlit as st
 import util
 import os
 from werkzeug.utils import secure_filename
+import requests
 
 st.set_page_config(page_title="BEPC-Resume_Styler", page_icon="static/logo.png", layout='wide')
 import base64
@@ -28,8 +29,8 @@ st.markdown(
 
 resumes = os.path.join(os.getcwd(), 'resumes')
 
-#job_description = st.text_input('1.- Enter the Job Description')
-job_description = st.text_area('1.- Enter the Job Description', height=200)
+job_id = st.text_input('1.- Enter the Job ID')
+#job_description = st.text_area('1.- Enter the Job Description', height=200)
 
 uploaded_file = st.file_uploader('2.- Choose a Resume file')
 if uploaded_file is not None:
@@ -47,14 +48,23 @@ if uploaded_file is not None:
     st.success('Resume uploaded successfully!')
 
     if st.button('Style Resume'):
-        with st.spinner('Transforming...'):
+        with st.spinner('Styling Resume...'):
             # Transform the Resume file
             if filename.endswith('.pdf'):
                 transformed_resume = util.transform_pdf(resume_file_path)
             elif filename.endswith('.docx'):
                 transformed_resume = util.transform_docx(resume_file_path)
+            #Send Request to the PHP API
+            url = 'https://bepc.backnetwork.net/JobSiftBeta/assets/php/equalizer.php'
+            data = {
+                "job": job_id,
+                "get_description": "1",
+            }
+
+            response = requests.post(url, data=data)
+            response_text = response.text 
             # Generate a summary of the transcript
-            summary = util.style("gpt-4", transformed_resume, job_description)
+            summary = util.style("gpt-4", transformed_resume, response_text)
 
         st.markdown("**Stylized Resume**", unsafe_allow_html=True)
         st.markdown(summary, unsafe_allow_html=True)
