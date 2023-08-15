@@ -43,7 +43,7 @@ def style(model, text, job_description):
         {"role":"user", "content":"5. Add the work experience section, labeled 'Experience' in bold. then underneath it, list the experience the candidate has, starting with the company in bold, the dates in bold and followed by the Job Title underneath it, and the  narrative of the experience, update the wording in the experience section to make it sound better, improve where possible do not invent experience. !!!Attention: Don't remove experience or keywords from this section!!!"},
         {"role":"user", "content":"6. Complete all sections based on the raw resume without asking the user to write or complete any section."},
         {"role":"user", "content":"7. Towards the end of the resume, add a section for training and certifications (in bold) if available. Include any computer skills (in bold) or published work (in bold) if available."},
-        {"role":"user", "content":"Please note that you should remove any comments from your response and only provide the new formatted resume. Also, make sure to remove email, address, and phone numbers from the new version."},
+        {"role":"user", "content":"Please note that you -should remove any comments from your response and only provide the new formatted resume. Also, make sure to remove email, address, and phone numbers from the new version."},
         {"role":"user", "content":"Here is the raw resume:" + str(text)},
         {"role":"system", "content":"Sure, I can help with that, please provide the Job Description"},
         {"role":"user", "content":str(job_description)},
