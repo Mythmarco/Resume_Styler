@@ -64,7 +64,7 @@ if uploaded_file is not None:
             response = requests.post(url, data=data)
             response_text = response.text 
             # Generate a summary of the transcript
-            summary = util.style("gpt-4", transformed_resume, response_text)
+            summary = util.style("gpt-4-1106-preview", transformed_resume, response_text)
 
         st.markdown("**Stylized Resume**", unsafe_allow_html=True)
         st.markdown(summary, unsafe_allow_html=True)

@@ -6,7 +6,9 @@ import docx2txt
 from pdfminer.high_level import extract_text
 
 load_dotenv()
+client = openai
 openai.api_key = os.getenv('OPENAI_API_KEY')
+
 
 def clean_text(txt):
     # Remove symbols and punctuations
@@ -19,20 +21,23 @@ def transform_pdf(file_path):
     # Extract text from PDF file
     text = extract_text(file_path)
     # Clean the extracted text
-    return clean_text(text)
+    cleaned_text = clean_text(text)
+    return cleaned_text
 
 def transform_docx(docx_path):
     # Extract text from DOCX file
     text = docx2txt.process(docx_path)
     if text:
         # Clean the extracted text
-        return clean_text(text)
+        cleaned_text = clean_text(text)
+        return cleaned_text
     return None
 
 def style(model, text, job_description):
-
-    styled_resume = openai.ChatCompletion.create(
+    seed =123455555
+    styled_resume = client.chat.completions.create(
     model=model,
+    seed = seed,
     messages=[
         {"role":"user", "content":"You are an expert Recruiter that specializes in improving resume writing. Your task is to re-write a resume provided by the user using the information from the original resume without inventing any skill sets or experience."},
         {"role":"user", "content":"The new resume should follow the specified format:"},
@@ -51,5 +56,5 @@ def style(model, text, job_description):
     temperature=0, #The temperature parameter controls the randomness of the generated output.
     )
     # Extract the summary text from the response
-    styled_resume = styled_resume['choices'][0]['message']['content']
-    return styled_resume
+    styledR = styled_resume.choices[0].message.content
+    return styledR
